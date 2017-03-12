@@ -1,0 +1,7 @@
+{
+	"ports":	{
+		"control_server":	45201,
+		"user_server":	45202,
+		"module_server":	45203
+	}
+}
