@@ -4,7 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "cJSON.h"
+#include "json.h"
+
+#define _CONFIG_FILE ".config"
 
 typedef struct config_t {
     int control_server_port;
@@ -16,7 +18,7 @@ extern config_t config;
 
 char* config_read_file(char* path);
 int config_parse(char* source);
-int config_init(char* path);
-int config_terminate(char* path);
+int config_init();
+int config_terminate();
 
 #endif

@@ -5,7 +5,7 @@ LIBS = -lpthread -lm
 DIR_INC = ./include
 DIR_SRC = ./src
 
-OBJ_SERVER = server.o config.o threads.o cJSON.o
+OBJ_SERVER = server.o config.o json.o pipe.o queue.o connection.o control.o user.o module.o
 OBJ_CLIENT = client.o
 
 all: server client

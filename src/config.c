@@ -2,6 +2,16 @@
 
 //TODO: add error handling
 
+int config_init() {
+    config.control_server_port = 45201;
+    config.user_server_port = 45202;
+    config.module_server_port = 45203;
+    char* source = config_read_file(_CONFIG_FILE);
+    config_parse(source);
+    free(source);
+    return 0;
+}
+
 char* config_read_file(char* path) {
     char *source = NULL;
     FILE *fp = fopen(path, "r");
@@ -25,25 +35,22 @@ char* config_read_file(char* path) {
 
 int config_parse(char* source) {
     cJSON* root = cJSON_Parse(source);
-    cJSON *ports = cJSON_GetObjectItem(root, "ports");
-    config.control_server_port = cJSON_GetObjectItem(ports, "control_server")->valueint;
-    config.user_server_port = cJSON_GetObjectItem(ports, "user_server")->valueint;
-    config.module_server_port = cJSON_GetObjectItem(ports, "module_server")->valueint;
+    cJSON* ports = cJSON_GetObjectItem(root, "ports");
+    cJSON* value;
+    if((value = cJSON_GetObjectItem(ports, "control_server")) != NULL) {
+        config.control_server_port = value->valueint;
+    }
+    if((value = cJSON_GetObjectItem(ports, "user_server")) != NULL) {
+        config.user_server_port = value->valueint;
+    }
+    if((value = cJSON_GetObjectItem(ports, "module_server")) != NULL) {
+        config.module_server_port = value->valueint;
+    }
     cJSON_Delete(root);
     return 0;
 }
 
-int config_init(char* path) {
-    config.control_server_port = 45201;
-    config.user_server_port = 45202;
-    config.module_server_port = 45203;
-    char* source = config_read_file(path);
-    config_parse(source);
-    free(source);
-    return 0;
-}
-
-int config_terminate(char* path) {
+int config_terminate() {
     cJSON *root, *ports;
     root = cJSON_CreateObject();
     cJSON_AddItemToObject(root, "ports", ports = cJSON_CreateObject());
@@ -53,7 +60,7 @@ int config_terminate(char* path) {
     char *rendered = cJSON_Print(root);
     cJSON_Delete(root);
     FILE *f;
-    if ((f = fopen(path, "w")) == NULL) {
+    if ((f = fopen(_CONFIG_FILE, "w")) == NULL) {
         printf("Error opening file!\n");
         exit(1);
     }
