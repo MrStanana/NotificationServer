@@ -9,7 +9,7 @@
 #include <pthread.h>
 
 #include "config.h"
-#include "queue.h"
+#include "database.h"
 #include "connection.h"
 #include "control.h"
 #include "user.h"

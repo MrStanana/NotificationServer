@@ -1,11 +1,12 @@
 CC = gcc
 CFLAGS = -g -Wall -iquote$(DIR_INC)
-LIBS = -lpthread -lm -libmysqlclient
+LIBS = -lpthread -lm -lmysqlclient
+#sudo apt-get install libmysqlclient-dev
 
 DIR_INC = ./include
 DIR_SRC = ./src
 
-OBJ_SERVER = server.o config.o json.o pipe.o queue.o connection.o control.o user.o module.o
+OBJ_SERVER = server.o config.o json.o database.o connection.o control.o user.o module.o
 OBJ_CLIENT = client.o
 
 all: server client

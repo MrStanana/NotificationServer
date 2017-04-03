@@ -38,13 +38,13 @@ int config_parse(char* source) {
     cJSON* ports = cJSON_GetObjectItem(root, "ports");
     cJSON* value;
     if((value = cJSON_GetObjectItem(ports, "control_server")) != NULL) {
-        config.control_server_port = value->valueint;
+        config.control_server_port = (int)value->valuedouble;
     }
     if((value = cJSON_GetObjectItem(ports, "user_server")) != NULL) {
-        config.user_server_port = value->valueint;
+        config.user_server_port = (int)value->valuedouble;
     }
     if((value = cJSON_GetObjectItem(ports, "module_server")) != NULL) {
-        config.module_server_port = value->valueint;
+        config.module_server_port = (int)value->valuedouble;
     }
     cJSON_Delete(root);
     return 0;

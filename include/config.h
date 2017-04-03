@@ -6,7 +6,8 @@
 
 #include "json.h"
 
-#define _CONFIG_FILE ".config"
+#define _CONFIG_FILE "config"
+#define _PRIVATE_CONFIG_FILE "config-private"
 
 typedef struct config_t {
     int control_server_port;

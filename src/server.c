@@ -7,7 +7,7 @@ int main(void) {
     pthread_mutex_init(&mutex, NULL);
     pthread_mutex_lock(&mutex);
     config_init();
-    queue_init();
+    database_init();
 
     if((result = pthread_create(&control_server, NULL, control_thread, NULL))) {
         fprintf(stderr,"Error - pthread_create() return code: %d\n", result);
@@ -28,7 +28,7 @@ int main(void) {
 
     sleep(2);
     pthread_mutex_destroy(&mutex);
-    queue_terminate();
+    database_terminate();
     config_terminate();
     exit(EXIT_SUCCESS);
 }
