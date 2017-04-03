@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -g -Wall -iquote$(DIR_INC)
-LIBS = -lpthread -lm
+LIBS = -lpthread -lm -libmysqlclient
 
 DIR_INC = ./include
 DIR_SRC = ./src
