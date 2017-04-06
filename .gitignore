@@ -32,6 +32,6 @@
 *.dSYM/
 *.su
 
-server
-client
+/bin/
+/obj/
 config-private
